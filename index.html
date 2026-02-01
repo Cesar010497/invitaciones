@@ -3,187 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VIP CLN | Catálogo de Lujo</title>
+    <title>VIP CLN | Catálogo Inteligente</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
     <style>
-        :root { --oro: #d4a574; --noche: #111111; }
-        body { font-family: 'Lato', sans-serif; background: #fdfdfd; color: var(--noche); user-select: none; -webkit-touch-callout: none; }
-        .font-gold { font-family: 'Playfair Display', serif; }
-        
-        /* Barra de Urgencia */
-        .barra-urgencia { background: var(--noche); color: var(--oro); font-size: 10px; padding: 5px; text-align: center; letter-spacing: 2px; }
-
-        /* Animación de Carga */
-        #loader { position: fixed; inset: 0; background: var(--noche); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .spinner { width: 50px; height: 50px; border: 3px solid var(--oro); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
-        
-        /* Secciones */
-        .pagina { display: none; opacity: 0; transition: 0.5s ease; padding-bottom: 100px; }
-        .pagina.activa { display: block; opacity: 1; }
-
-        /* Tarjetas */
-        .card-vip { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; position: relative; }
-        .badge-oferta { position: absolute; top: 15px; left: 15px; background: #e63946; color: white; padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: bold; z-index: 10; }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        :root { --oro: #d4a574; --negro: #0f0f0f; }
+        body { font-family: 'Poppins', sans-serif; background: #fdfdfd; color: var(--negro); padding-bottom: 90px; }
+        .font-luxury { font-family: 'Playfair Display', serif; }
+        .seccion { display: none; }
+        .seccion.activa { display: block; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tarjeta-vip { background: white; border-radius: 35px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.02); }
+        .nav-app { position: fixed; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(10px); border-radius: 25px; display: flex; justify-content: space-around; padding: 18px; z-index: 100; border: 1px solid rgba(212, 165, 116, 0.2); }
+        .nav-btn { color: #666; font-size: 1.3rem; transition: 0.3s; }
+        .nav-btn.active { color: var(--oro); transform: scale(1.2); }
+        .badge-precio { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px); color: var(--negro); padding: 6px 15px; border-radius: 15px; font-weight: 700; font-size: 14px; position: absolute; top: 20px; right: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <div class="barra-urgencia uppercase font-bold">
-        🔥 <span id="viewers">5</span> personas viendo diseños ahorita • Culiacán, Sin.
-    </div>
+    <header class="p-8 flex justify-between items-center bg-white/50 sticky top-0 z-50 backdrop-blur-sm">
+        <div>
+            <h1 class="font-luxury text-3xl tracking-tighter italic">VIP <span class="text-[#d4a574]">CLN</span></h1>
+            <div class="flex items-center gap-1">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                <span class="text-[9px] font-bold tracking-[2px] uppercase opacity-40">Culiacán, Sinaloa</span>
+            </div>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shadow-inner">
+            <i class="fas fa-crown text-[#d4a574] text-xs"></i>
+        </div>
+    </header>
 
-    <div id="loader">
-        <div class="spinner"></div>
-        <h1 class="font-gold text-white mt-4 tracking-[0.3em]">VIP CLN</h1>
-    </div>
+    <main class="px-6">
+        <section id="inicio" class="seccion activa">
+            <div class="relative h-[450px] rounded-[45px] overflow-hidden shadow-2xl mb-8 group">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
+                    <h2 class="font-luxury text-4xl leading-tight mb-2">Exclusividad en cada pixel.</h2>
+                    <p class="text-sm opacity-70 mb-6 font-light">Diseñamos la puerta de entrada a tu evento más importante.</p>
+                    <button onclick="ir('catalogo')" class="bg-[#d4a574] text-white py-4 rounded-2xl font-bold uppercase tracking-[3px] text-[10px] shadow-lg active:scale-95 transition">Ver Catálogo</button>
+                </div>
+            </div>
+        </section>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-gray-100 flex justify-around p-4 z-50">
-        <button onclick="cambiarPagina('inicio')" class="text-gray-400 nav-btn" id="n-inicio"><i class="fas fa-home text-xl"></i></button>
-        <button onclick="cambiarPagina('catalogo')" class="text-gray-400 nav-btn" id="n-catalogo"><i class="fas fa-th-large text-xl"></i></button>
-        <button onclick="cambiarPagina('cotizar')" class="text-gray-400 nav-btn" id="n-cotizar"><i class="fas fa-file-invoice-dollar text-xl"></i></button>
-        <button onclick="cambiarPagina('admin')" class="text-gray-400 nav-btn" id="n-admin"><i class="fas fa-user-shield text-xl"></i></button>
+        <section id="catalogo" class="seccion">
+            <h2 class="font-luxury text-3xl mb-8">Colección <span class="text-gray-300">2026</span></h2>
+            <div id="contenedor-items" class="grid grid-cols-1 gap-10">
+                <div class="text-center py-20 opacity-30">
+                    <i class="fas fa-circle-notch animate-spin text-3xl"></i>
+                    <p class="mt-4 text-xs font-bold tracking-widest uppercase">Sincronizando Excel...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin" class="seccion">
+            <div class="bg-white p-10 rounded-[45px] shadow-xl border border-gray-50 text-center">
+                <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                    <i class="fas fa-database text-[#d4a574] text-2xl"></i>
+                </div>
+                <h2 class="font-luxury text-2xl mb-2">Gestión de Datos</h2>
+                <p class="text-gray-400 text-[11px] mb-8 leading-relaxed uppercase tracking-widest">Modifica precios, fotos y textos directo desde tu celular en la App de Google Sheets.</p>
+                
+                <a href="https://docs.google.com/spreadsheets/d/1Scx-9tI6N6ukMQ7WfEwhzq4W4ieG4iIOiIkus6PGFWQ/edit" target="_blank" class="block w-full bg-black text-white py-4 rounded-2xl font-bold text-[10px] tracking-widest uppercase shadow-xl active:scale-95 transition">
+                    <i class="fas fa-external-link-alt mr-2"></i> Abrir Mi Excel
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <nav class="nav-app">
+        <a onclick="ir('inicio')" id="btn-inicio" class="nav-btn active"><i class="fas fa-home"></i></a>
+        <a onclick="ir('catalogo')" id="btn-catalogo" class="nav-btn"><i class="fas fa-th-large"></i></a>
+        <a onclick="ir('admin')" id="btn-admin" class="nav-btn"><i class="fas fa-cog"></i></a>
     </nav>
 
-    <section id="inicio" class="pagina activa p-6 text-center">
-        <div class="mt-10 mb-10">
-            <h1 class="font-gold text-5xl text-gray-800">Diseños que <br><span style="color:var(--oro)">Impactan</span></h1>
-            <p class="text-gray-400 text-xs mt-4 tracking-widest uppercase">Elegancia Digital para tus Eventos</p>
-        </div>
-        <div class="rounded-[40px] overflow-hidden shadow-2xl border-8 border-white mb-10">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800" class="w-full h-80 object-cover">
-        </div>
-        <button onclick="cambiarPagina('catalogo')" class="bg-[#111] text-white w-full py-5 rounded-3xl font-bold tracking-widest shadow-xl">DESCUBRIR CATÁLOGO</button>
-    </section>
-
-    <section id="catalogo" class="pagina">
-        <div class="p-6 sticky top-0 bg-white/90 backdrop-blur-sm z-40 border-b border-gray-50">
-            <h2 class="font-gold text-2xl mb-4 text-center">Colección 2026</h2>
-            <div class="flex gap-3 overflow-x-auto no-scrollbar">
-                <button class="px-6 py-2 bg-black text-white rounded-full text-xs font-bold">Todos</button>
-                <button class="px-6 py-2 border rounded-full text-xs font-bold text-gray-400">Bodas</button>
-                <button class="px-6 py-2 border rounded-full text-xs font-bold text-gray-400">XV Años</button>
-            </div>
-        </div>
-        <div id="items-catalogo" class="p-6 space-y-8">
-            </div>
-    </section>
-
-    <section id="cotizar" class="pagina p-6">
-        <div class="bg-white p-8 rounded-[40px] shadow-lg border border-gray-50">
-            <h2 class="font-gold text-3xl mb-2 text-center text-gray-800">Cotización Flash</h2>
-            <p class="text-center text-gray-400 text-xs mb-8">Recibe tu presupuesto en menos de 5 min.</p>
-            
-            <div class="space-y-4">
-                <input type="text" id="c-nombre" placeholder="Tu Nombre" class="w-full p-4 bg-gray-50 rounded-2xl outline-none focus:ring-2 ring-[#d4a574]/20 border-none">
-                <select id="c-evento" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border-none">
-                    <option value="Boda">Boda</option>
-                    <option value="XV Años">XV Años</option>
-                    <option value="Bautizo">Bautizo / Infantil</option>
-                </select>
-                <input type="number" id="c-cantidad" placeholder="¿Cuántas invitaciones?" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border-none">
-                <textarea id="c-detalles" placeholder="¿Algún detalle extra?" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border-none h-24"></textarea>
-                
-                <button onclick="enviarCotizacion()" class="w-full bg-[#d4a574] text-white py-5 rounded-2xl font-bold shadow-lg mt-4">ENVIAR A WHATSAPP</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="admin" class="pagina p-6">
-        <div id="lock-admin" class="mt-20 text-center">
-            <i class="fas fa-fingerprint text-6xl text-gray-200 mb-6"></i>
-            <h3 class="font-bold mb-4">Acceso Propietario</h3>
-            <input type="password" id="nip" placeholder="••••" class="w-32 p-4 bg-gray-100 rounded-2xl text-center text-2xl mb-4 block mx-auto outline-none">
-            <button onclick="accesoAdmin()" class="bg-black text-white px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest">Verificar</button>
-        </div>
-        <div id="panel-admin" class="hidden">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-                <h3 class="font-bold mb-2">Panel de Control VIP</h3>
-                <p class="text-xs text-gray-400">Desde aquí gestionas tus ventas y diseños.</p>
-                <button onclick="location.reload()" class="mt-10 w-full p-3 border-2 border-red-100 text-red-400 rounded-xl text-xs font-bold">CERRAR SESIÓN</button>
-            </div>
-        </div>
-    </section>
-
     <script>
-        const MI_TEL = "526670000000"; // <--- CAMBIA POR TU WHATSAPP
+        // CONFIGURACIÓN MAESTRA
+        const SHEET_ID = '1Scx-9tI6N6ukMQ7WfEwhzq4W4ieG4iIOiIkus6PGFWQ';
+        const CSV_LINK = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 
-        const PRODUCTOS = [
-            { nombre: "Boda Minimalist Gold", precio: "$450", oferta: true, img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500" },
-            { nombre: "XV Rose Glitter", precio: "$380", oferta: false, img: "https://images.unsplash.com/photo-1520854221250-85d301c5ef64?w=500" }
-        ];
+        async function cargarExcel() {
+            try {
+                const response = await fetch(CSV_LINK);
+                const csvData = await response.text();
+                
+                // Dividir filas y limpiar comillas de Google
+                const filas = csvData.split('\n').slice(1);
+                const grid = document.getElementById('contenedor-items');
+                grid.innerHTML = '';
 
-        window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 1500);
-            renderizar();
-            actualizarVistas();
-        });
-
-        function renderizar() {
-            const container = document.getElementById('items-catalogo');
-            container.innerHTML = '';
-            PRODUCTOS.forEach(p => {
-                container.innerHTML += `
-                    <div class="card-vip">
-                        ${p.oferta ? '<div class="badge-oferta">OFERTA VIP</div>' : ''}
-                        <img src="${p.img}" class="w-full h-80 object-cover">
-                        <div class="p-6 text-center">
-                            <h3 class="font-gold text-2xl mb-1">${p.nombre}</h3>
-                            <p class="text-[#d4a574] font-bold mb-4">${p.precio} MXN</p>
-                            <button onclick="pedido('${p.nombre}')" class="w-full bg-[#d4a574] text-white py-4 rounded-2xl font-bold text-[10px] tracking-widest uppercase">Apartar Diseño</button>
-                        </div>
-                    </div>
-                `;
-            });
+                filas.forEach(f => {
+                    const c = f.split('","').map(val => val.replace(/"/g, '').trim());
+                    if(c.length >= 4) {
+                        const [nombre, precio, cat, img, wsp] = c;
+                        grid.innerHTML += `
+                            <div class="tarjeta-vip">
+                                <div class="relative h-[420px]">
+                                    <img src="${img}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/600x800?text=Subir+Foto+a+Excel'">
+                                    <div class="badge-precio">${precio}</div>
+                                </div>
+                                <div class="p-8">
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div>
+                                            <h3 class="font-luxury text-2xl mb-1">${nombre}</h3>
+                                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">${cat}</span>
+                                        </div>
+                                    </div>
+                                    <button onclick="window.open('https://wa.me/${wsp}?text=Hola VIP CLN, quiero el diseño: *${nombre}*','_blank')" 
+                                            class="w-full bg-[#111] text-white py-4 rounded-2xl font-bold text-[10px] tracking-widest uppercase flex items-center justify-center gap-3 active:bg-[#d4a574] transition-colors">
+                                        <i class="fab fa-whatsapp text-lg"></i> Apartar Ahora
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+            } catch (error) {
+                document.getElementById('contenedor-items').innerHTML = `<p class="text-center text-red-400 text-xs py-20 font-bold uppercase tracking-widest">Error: Activa "Publicar en la Web" en el Excel</p>`;
+            }
         }
 
-        function pedido(nombre) {
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#d4a574', '#111111', '#ffffff'] });
-            setTimeout(() => {
-                window.open(`https://wa.me/${MI_TEL}?text=¡Hola! Me encantó el diseño de ${nombre}. ¿Me das informes?`, '_blank');
-            }, 1000);
-        }
-
-        function enviarCotizacion() {
-            const n = document.getElementById('c-nombre').value;
-            const e = document.getElementById('c-evento').value;
-            const c = document.getElementById('c-cantidad').value;
-            const d = document.getElementById('c-detalles').value;
-            if(!n || !c) return alert("Pon tu nombre y cantidad, plebe.");
-            
-            const msg = `COTIZACIÓN FLASH:%0A👤 Nombre: ${n}%0A🎂 Evento: ${e}%0A📊 Cantidad: ${c}%0A📝 Detalles: ${d}`;
-            window.open(`https://wa.me/${MI_TEL}?text=${msg}`, '_blank');
-        }
-
-        function accesoAdmin() {
-            const pin = document.getElementById('nip').value;
-            if(pin === "0104") {
-                document.getElementById('lock-admin').style.display = 'none';
-                document.getElementById('panel-admin').classList.remove('hidden');
-            } else { alert("NIP Incorrecto."); }
-        }
-
-        function cambiarPagina(id) {
-            document.querySelectorAll('.pagina').forEach(p => p.classList.remove('activa'));
+        function ir(id) {
+            document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
             document.getElementById(id).classList.add('activa');
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.replace('text-[#d4a574]', 'text-gray-400'));
-            document.getElementById('n-' + id).classList.replace('text-gray-400', 'text-[#d4a574]');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + id).classList.add('active');
+            if(id === 'catalogo') cargarExcel();
             window.scrollTo(0,0);
-        }
-
-        function actualizarVistas() {
-            setInterval(() => {
-                const random = Math.floor(Math.random() * 10) + 3;
-                document.getElementById('viewers').innerText = random;
-            }, 5000);
         }
     </script>
 </body>
 </html>
-
