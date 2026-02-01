@@ -3,127 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP CLN | Invitaciones Digitales</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <title>Catálogo Digital</title> <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Lato', sans-serif; background-color: #fdf6f0; color: #2c1810; }
-        .font-gold { color: #d4a574; }
-        .bg-gold { background-color: #d4a574; }
+        body { font-family: 'Lato', sans-serif; background-color: #f9f9f9; padding-bottom: 80px; }
         .font-display { font-family: 'Playfair Display', serif; }
-        .card:hover { transform: translateY(-5px); transition: 0.3s; }
-        /* Estilo para que el panel de admin se vea profesional */
-        input::placeholder { color: #a0a0a0; }
+        
+        /* Animaciones */
+        .pagina { display: none; opacity: 0; transition: opacity 0.3s; }
+        .pagina.activa { display: block; opacity: 1; }
+        
+        /* Navegación App */
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: white; border-top: 1px solid #eee;
+            display: flex; justify-content: space-around; padding: 10px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 50;
+        }
+        .nav-item { text-align: center; color: #aaa; font-size: 0.7rem; text-transform: uppercase; }
+        .nav-item i { font-size: 1.4rem; display: block; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <header class="p-8 text-center bg-white shadow-sm border-b border-gray-100">
-        <h1 class="font-display text-4xl mb-2 text-[#2c1810]">Invitaciones <span class="font-gold text-5xl">VIP</span> CLN</h1>
-        <p class="italic text-gray-400 tracking-widest text-xs uppercase font-bold">Exclusividad y Elegancia Digital</p>
-    </header>
+    <nav class="bg-white p-5 shadow-sm sticky top-0 z-40 flex justify-between items-center">
+        <div>
+            <h1 id="titulo-web" class="font-display text-xl tracking-wider font-bold"></h1>
+            <p id="subtitulo-web" class="text-[10px] text-gray-400 tracking-[0.2em] uppercase"></p>
+        </div>
+        <a id="btn-wsp-top" href="#" target="_blank" class="text-3xl transition-transform hover:scale-110">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </nav>
 
-    <section class="p-6 max-w-6xl mx-auto min-h-[400px]">
-        <h2 class="font-display text-center text-2xl mb-10 text-[#5a4a42]">Catálogo de Diseños Disponibles</h2>
-        <div id="catalogo" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section id="inicio" class="pagina activa p-6">
+        <div class="text-center mt-4 mb-10">
+            <div class="rounded-2xl overflow-hidden shadow-xl mb-8 border-4 border-white h-80">
+                <img id="foto-portada" src="" class="w-full h-full object-cover">
+            </div>
+            <h2 class="font-display text-3xl mb-2 text-gray-800">Bienvenidos</h2>
+            <p class="text-gray-500 text-sm mb-6">Encuentra la invitación perfecta para tu evento.</p>
+            
+            <button onclick="cambiarPagina('catalogo')" id="btn-principal" class="w-full py-4 rounded-xl font-bold tracking-widest shadow-lg text-white uppercase transition-all">
+                Ver Catálogo
+            </button>
+        </div>
+    </section>
+
+    <section id="catalogo" class="pagina p-6">
+        <h2 class="font-display text-2xl text-center mb-6 text-gray-800">Diseños Disponibles</h2>
+        <div id="lista-invitaciones" class="space-y-6">
             </div>
     </section>
 
-    <section id="admin" class="bg-white p-8 border-t-4 border-[#d4a574] mt-20 shadow-2xl">
-        <div class="max-w-4xl mx-auto">
-            <h3 class="font-display text-2xl mb-2 text-center text-[#2c1810]">⚙️ Panel de Gestión</h3>
-            <p class="text-center text-gray-500 text-sm mb-8">Agrega o elimina diseños de tu página en tiempo real.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#f9f9f9] p-6 rounded-2xl border border-gray-200">
-                <div class="flex flex-col gap-2">
-                    <label class="text-xs font-bold uppercase text-[#d4a574]">Nombre del Diseño</label>
-                    <input type="text" id="nombre" placeholder="Ej. XV Años Royal" class="p-3 border rounded-lg focus:ring-2 focus:ring-[#d4a574] outline-none">
-                </div>
-                <div class="flex flex-col gap-2">
-                    <label class="text-xs font-bold uppercase text-[#d4a574]">Precio de Renta (MXN)</label>
-                    <input type="text" id="precio" placeholder="Ej. $450" class="p-3 border rounded-lg focus:ring-2 focus:ring-[#d4a574] outline-none">
-                </div>
-                <div class="flex flex-col gap-2 md:col-span-2">
-                    <label class="text-xs font-bold uppercase text-[#d4a574]">Link de la Foto (Canva/Google/Imgur)</label>
-                    <input type="text" id="imgUrl" placeholder="Pega el enlace de la imagen aquí" class="p-3 border rounded-lg focus:ring-2 focus:ring-[#d4a574] outline-none">
-                </div>
-                <button onclick="agregarInvitacion()" class="bg-black text-white p-4 rounded-xl font-bold mt-4 hover:bg-[#d4a574] transition-all shadow-lg active:scale-95 md:col-span-2">
-                    PUBLICAR AHORA
-                </button>
+    <section id="admin" class="pagina p-6">
+        <div class="bg-white p-6 rounded-2xl shadow-lg">
+            <h3 class="font-display text-xl mb-4 text-center">🔧 Panel de Prueba</h3>
+            <p class="text-xs text-gray-400 mb-4 text-justify">
+                <b>OJO:</b> Las invitaciones que agregues aquí solo las verás tú en este celular (modo prueba). 
+                Para que las vean tus clientes, debes agregarlas en el código de GitHub en la sección "LISTA DE INVITACIONES".
+            </p>
+            <div class="space-y-3">
+                <input type="text" id="nombreInput" placeholder="Nombre del diseño" class="w-full p-3 border rounded bg-gray-50">
+                <input type="text" id="precioInput" placeholder="Precio" class="w-full p-3 border rounded bg-gray-50">
+                <input type="text" id="imgInput" placeholder="Link de imagen" class="w-full p-3 border rounded bg-gray-50">
+                <button onclick="guardarLocal()" class="w-full bg-gray-800 text-white py-3 rounded font-bold">PROBAR DISEÑO</button>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-gray-400 text-[10px] uppercase tracking-widest">
-        Invitaciones VIP CLN &copy; 2026 | Hecho para los mejores eventos
-    </footer>
+    <div class="nav-bar">
+        <button onclick="cambiarPagina('inicio')" class="nav-item active" id="nav-inicio">
+            <i class="fas fa-home"></i> Inicio
+        </button>
+        <button onclick="cambiarPagina('catalogo')" class="nav-item" id="nav-catalogo">
+            <i class="fas fa-images"></i> Catálogo
+        </button>
+        <button onclick="cambiarPagina('admin')" class="nav-item" id="nav-admin">
+            <i class="fas fa-user-cog"></i> Admin
+        </button>
+    </div>
 
     <script>
-        // 1. CONFIGURA TU WHATSAPP AQUÍ (Solo números, con 52 al principio)
-        const miWhatsApp = "526670000000"; // <-- PON TU NÚMERO AQUÍ
+        // ==========================================
+        //      ⚙️ ÁREA DE AJUSTES (EDITA AQUÍ) 
+        // ==========================================
+        
+        const CONFIG = {
+            titulo: "VIP CLN",                // Nombre de tu negocio
+            subtitulo: "Invitaciones Digitales", // Texto chiquito
+            whatsapp: "526670000000",         // TU NÚMERO (con lada 52)
+            colorPrincipal: "#d4a574",        // Color dorado (#d4a574) o cambia a azul (#007bff), rojo, etc.
+            portada: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800" // Foto de inicio
+        };
 
-        // 2. Base de datos local (se guarda en tu navegador)
-        let misInvitaciones = JSON.parse(localStorage.getItem('datosVip')) || [
-            {nombre: "Boda Imperial Gold", precio: "$500", img: "https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?w=500"},
-            {nombre: "XV Jardín Secreto", precio: "$450", img: "https://images.unsplash.com/photo-1519741497674-611481863552?w=500"}
+        // ==========================================
+        //      📸 LISTA DE INVITACIONES (PÚBLICAS)
+        // ==========================================
+        // Para agregar una nueva, copia una línea y cambia los datos:
+        const INVITACIONES_FIJAS = [
+            { nombre: "XV Años Rose Gold", precio: "$450", img: "https://images.unsplash.com/photo-1520854221250-85d301c5ef64?w=500" },
+            { nombre: "Boda Elegante",     precio: "$600", img: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500" },
+            { nombre: "Bautizo Niña",      precio: "$350", img: "https://images.unsplash.com/photo-1605494242637-88540b37f465?w=500" }
         ];
 
-        // 3. Función para pintar las invitaciones en pantalla
-        function actualizarVista() {
-            const contenedor = document.getElementById('catalogo');
-            contenedor.innerHTML = '';
+        // ==========================================
+        //      NO TOQUES NADA ABAJO DE ESTA LÍNEA
+        // ==========================================
 
-            misInvitaciones.forEach((inv, index) => {
-                contenedor.innerHTML += `
-                    <div class="card bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
-                        <img src="${inv.img}" class="w-full h-80 object-cover" onerror="this.src='https://via.placeholder.com/400x600?text=Error+al+Cargar+Imagen'">
-                        <div class="p-6">
-                            <h3 class="font-display text-2xl mb-1 text-[#2c1810]">${inv.nombre}</h3>
-                            <p class="font-gold font-bold text-xl mb-5">${inv.precio} MXN</p>
-                            <a href="https://wa.me/${miWhatsApp}?text=¡Hola! Me interesa rentar el diseño: ${inv.nombre}" 
-                               target="_blank" 
-                               class="block text-center bg-[#d4a574] text-white py-4 rounded-2xl hover:bg-black transition-all font-bold tracking-widest text-sm shadow-md">
-                               COTIZAR POR WHATSAPP
+        // 1. APLICAR CONFIGURACIÓN VISUAL
+        document.getElementById('titulo-web').innerText = CONFIG.titulo;
+        document.getElementById('titulo-web').style.color = "#2c1810"; // Color texto oscuro
+        document.getElementById('subtitulo-web').innerText = CONFIG.subtitulo;
+        document.getElementById('foto-portada').src = CONFIG.portada;
+        
+        // Aplicar colores dinámicos
+        document.getElementById('btn-wsp-top').style.color = "#25D366"; // WhatsApp siempre verde
+        document.getElementById('btn-wsp-top').href = `https://wa.me/${CONFIG.whatsapp}`;
+        document.getElementById('btn-principal').style.backgroundColor = CONFIG.colorPrincipal;
+        
+        // Estilos extra para el menú activo
+        const estiloActivo = `color: ${CONFIG.colorPrincipal}; font-weight: bold;`;
+
+        // 2. SISTEMA DE NAVEGACIÓN
+        function cambiarPagina(pagina) {
+            document.querySelectorAll('.pagina').forEach(p => {
+                p.classList.remove('activa');
+                setTimeout(() => p.style.display = 'none', 300);
+            });
+            setTimeout(() => {
+                const p = document.getElementById(pagina);
+                p.style.display = 'block';
+                setTimeout(() => p.classList.add('activa'), 10);
+            }, 300);
+
+            // Actualizar menú abajo
+            document.querySelectorAll('.nav-item').forEach(btn => btn.style = "");
+            const btnActivo = document.getElementById('nav-' + pagina);
+            if(btnActivo) btnActivo.style = estiloActivo;
+            
+            window.scrollTo(0, 0);
+        }
+
+        // 3. CARGAR CATÁLOGO (Mezcla las fijas de GitHub + las locales de prueba)
+        let locales = JSON.parse(localStorage.getItem('mis_diseños_local')) || [];
+        let todoElCatalogo = [...INVITACIONES_FIJAS, ...locales];
+
+        function renderizar() {
+            const lista = document.getElementById('lista-invitaciones');
+            lista.innerHTML = '';
+            
+            todoElCatalogo.forEach(item => {
+                lista.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 mb-6">
+                        <img src="${item.img}" class="w-full h-64 object-cover">
+                        <div class="p-5">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-lg font-bold text-gray-800">${item.nombre}</h3>
+                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">${item.precio}</span>
+                            </div>
+                            <a href="https://wa.me/${CONFIG.whatsapp}?text=Hola, me interesa el diseño: ${item.nombre}" 
+                               target="_blank"
+                               class="block text-center text-white font-bold py-3 rounded-lg mt-3 hover:opacity-90 transition"
+                               style="background-color: ${CONFIG.colorPrincipal}">
+                               PEDIR POR WHATSAPP
                             </a>
-                            <button onclick="eliminar(${index})" class="mt-6 w-full text-[9px] text-gray-300 uppercase font-bold hover:text-red-500 transition-colors">Remover del catálogo</button>
                         </div>
                     </div>
                 `;
             });
-            localStorage.setItem('datosVip', JSON.stringify(misInvitaciones));
         }
 
-        // 4. Función para agregar nuevas invitaciones
-        function agregarInvitacion() {
-            const nombre = document.getElementById('nombre').value;
-            const precio = document.getElementById('precio').value;
-            const img = document.getElementById('imgUrl').value;
-
-            if(nombre && precio && img) {
-                misInvitaciones.push({nombre, precio, img});
-                actualizarVista();
-
-                // Limpiar el formulario
-                document.getElementById('nombre').value = '';
-                document.getElementById('precio').value = '';
-                document.getElementById('imgUrl').value = '';
-
-                alert("✨ ¡Invitación publicada con éxito!");
-            } else {
-                alert("⚠️ Plebe, llena todos los campos para poder publicar.");
+        // 4. GUARDAR LOCAL (Solo para prueba)
+        function guardarLocal() {
+            const nombre = document.getElementById('nombreInput').value;
+            const precio = document.getElementById('precioInput').value;
+            const img = document.getElementById('imgInput').value;
+            if(nombre && img) {
+                locales.push({nombre, precio, img});
+                localStorage.setItem('mis_diseños_local', JSON.stringify(locales));
+                alert("Diseño agregado (Solo visible en este cel)");
+                todoElCatalogo = [...INVITACIONES_FIJAS, ...locales];
+                renderizar();
+                cambiarPagina('catalogo');
             }
         }
 
-        // 5. Función para borrar
-        function eliminar(id) {
-            if(confirm("¿Seguro que quieres quitar este diseño de la vista pública?")) {
-                misInvitaciones.splice(id, 1);
-                actualizarVista();
-            }
-        }
-
-        // Ejecutar al cargar la página
-        actualizarVista();
+        // Iniciar
+        renderizar();
+        cambiarPagina('inicio'); // Forzar inicio en portada
     </script>
 </body>
 </html>
+
